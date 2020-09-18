@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BDPruebaTecnicaModelStoreContainer" CdmEntityContainer="BDPruebaTecnicaEntities">
+    <EntitySetMapping Name="Cantante">
+      <EntityTypeMapping TypeName="BDPruebaTecnicaModel.Cantante">
+        <MappingFragment StoreEntitySet="Cantante">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="kindOfMusic" ColumnName="kindOfMusic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CantanteSongs">
+      <EntityTypeMapping TypeName="BDPruebaTecnicaModel.CantanteSongs">
+        <MappingFragment StoreEntitySet="CantanteSongs">
+          <ScalarProperty Name="idInter" ColumnName="idInter" />
+          <ScalarProperty Name="idCantante" ColumnName="idCantante" />
+          <ScalarProperty Name="idSong" ColumnName="idSong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="songs">
+      <EntityTypeMapping TypeName="BDPruebaTecnicaModel.songs">
+        <MappingFragment StoreEntitySet="songs">
+          <ScalarProperty Name="idSong" ColumnName="idSong" />
+          <ScalarProperty Name="song" ColumnName="song" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BDPruebaTecnicaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cantante">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="kindOfMusic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CantanteSongs" Relationship="Self.FK__CantanteS__idCan__286302EC" FromRole="Cantante" ToRole="CantanteSongs" />
+  </EntityType>
+  <EntityType Name="CantanteSongs">
+    <Key>
+      <PropertyRef Name="idInter" />
+    </Key>
+    <Property Name="idInter" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idCantante" Type="Int32" />
+    <Property Name="idSong" Type="Int32" />
+    <NavigationProperty Name="Cantante" Relationship="Self.FK__CantanteS__idCan__286302EC" FromRole="CantanteSongs" ToRole="Cantante" />
+    <NavigationProperty Name="songs" Relationship="Self.FK__CantanteS__idSon__29572725" FromRole="CantanteSongs" ToRole="songs" />
+  </EntityType>
+  <EntityType Name="songs">
+    <Key>
+      <PropertyRef Name="idSong" />
+    </Key>
+    <Property Name="idSong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="song" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CantanteSongs" Relationship="Self.FK__CantanteS__idSon__29572725" FromRole="songs" ToRole="CantanteSongs" />
+  </EntityType>
+  <Association Name="FK__CantanteS__idCan__286302EC">
+    <End Role="Cantante" Type="Self.Cantante" Multiplicity="0..1" />
+    <End Role="CantanteSongs" Type="Self.CantanteSongs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cantante">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CantanteSongs">
+        <PropertyRef Name="idCantante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CantanteS__idSon__29572725">
+    <End Role="songs" Type="Self.songs" Multiplicity="0..1" />
+    <End Role="CantanteSongs" Type="Self.CantanteSongs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="songs">
+        <PropertyRef Name="idSong" />
+      </Principal>
+      <Dependent Role="CantanteSongs">
+        <PropertyRef Name="idSong" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BDPruebaTecnicaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cantante" EntityType="Self.Cantante" />
+    <EntitySet Name="CantanteSongs" EntityType="Self.CantanteSongs" />
+    <EntitySet Name="songs" EntityType="Self.songs" />
+    <AssociationSet Name="FK__CantanteS__idCan__286302EC" Association="Self.FK__CantanteS__idCan__286302EC">
+      <End Role="Cantante" EntitySet="Cantante" />
+      <End Role="CantanteSongs" EntitySet="CantanteSongs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CantanteS__idSon__29572725" Association="Self.FK__CantanteS__idSon__29572725">
+      <End Role="songs" EntitySet="songs" />
+      <End Role="CantanteSongs" EntitySet="CantanteSongs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

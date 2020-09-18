@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BDPruebaTecnicaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cantante">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="kindOfMusic" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CantanteSongs">
+          <Key>
+            <PropertyRef Name="idInter" />
+          </Key>
+          <Property Name="idInter" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCantante" Type="int" />
+          <Property Name="idSong" Type="int" />
+        </EntityType>
+        <EntityType Name="songs">
+          <Key>
+            <PropertyRef Name="idSong" />
+          </Key>
+          <Property Name="idSong" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="song" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__CantanteS__idCan__286302EC">
+          <End Role="Cantante" Type="Self.Cantante" Multiplicity="0..1" />
+          <End Role="CantanteSongs" Type="Self.CantanteSongs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cantante">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CantanteSongs">
+              <PropertyRef Name="idCantante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CantanteS__idSon__29572725">
+          <End Role="songs" Type="Self.songs" Multiplicity="0..1" />
+          <End Role="CantanteSongs" Type="Self.CantanteSongs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="songs">
+              <PropertyRef Name="idSong" />
+            </Principal>
+            <Dependent Role="CantanteSongs">
+              <PropertyRef Name="idSong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDPruebaTecnicaModelStoreContainer">
+          <EntitySet Name="Cantante" EntityType="Self.Cantante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CantanteSongs" EntityType="Self.CantanteSongs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="songs" EntityType="Self.songs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CantanteS__idCan__286302EC" Association="Self.FK__CantanteS__idCan__286302EC">
+            <End Role="Cantante" EntitySet="Cantante" />
+            <End Role="CantanteSongs" EntitySet="CantanteSongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CantanteS__idSon__29572725" Association="Self.FK__CantanteS__idSon__29572725">
+            <End Role="songs" EntitySet="songs" />
+            <End Role="CantanteSongs" EntitySet="CantanteSongs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDPruebaTecnicaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cantante">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kindOfMusic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CantanteSongs" Relationship="Self.FK__CantanteS__idCan__286302EC" FromRole="Cantante" ToRole="CantanteSongs" />
+        </EntityType>
+        <EntityType Name="CantanteSongs">
+          <Key>
+            <PropertyRef Name="idInter" />
+          </Key>
+          <Property Name="idInter" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCantante" Type="Int32" />
+          <Property Name="idSong" Type="Int32" />
+          <NavigationProperty Name="Cantante" Relationship="Self.FK__CantanteS__idCan__286302EC" FromRole="CantanteSongs" ToRole="Cantante" />
+          <NavigationProperty Name="songs" Relationship="Self.FK__CantanteS__idSon__29572725" FromRole="CantanteSongs" ToRole="songs" />
+        </EntityType>
+        <EntityType Name="songs">
+          <Key>
+            <PropertyRef Name="idSong" />
+          </Key>
+          <Property Name="idSong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="song" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CantanteSongs" Relationship="Self.FK__CantanteS__idSon__29572725" FromRole="songs" ToRole="CantanteSongs" />
+        </EntityType>
+        <Association Name="FK__CantanteS__idCan__286302EC">
+          <End Role="Cantante" Type="Self.Cantante" Multiplicity="0..1" />
+          <End Role="CantanteSongs" Type="Self.CantanteSongs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cantante">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CantanteSongs">
+              <PropertyRef Name="idCantante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CantanteS__idSon__29572725">
+          <End Role="songs" Type="Self.songs" Multiplicity="0..1" />
+          <End Role="CantanteSongs" Type="Self.CantanteSongs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="songs">
+              <PropertyRef Name="idSong" />
+            </Principal>
+            <Dependent Role="CantanteSongs">
+              <PropertyRef Name="idSong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDPruebaTecnicaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cantante" EntityType="Self.Cantante" />
+          <EntitySet Name="CantanteSongs" EntityType="Self.CantanteSongs" />
+          <EntitySet Name="songs" EntityType="Self.songs" />
+          <AssociationSet Name="FK__CantanteS__idCan__286302EC" Association="Self.FK__CantanteS__idCan__286302EC">
+            <End Role="Cantante" EntitySet="Cantante" />
+            <End Role="CantanteSongs" EntitySet="CantanteSongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CantanteS__idSon__29572725" Association="Self.FK__CantanteS__idSon__29572725">
+            <End Role="songs" EntitySet="songs" />
+            <End Role="CantanteSongs" EntitySet="CantanteSongs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDPruebaTecnicaModelStoreContainer" CdmEntityContainer="BDPruebaTecnicaEntities">
+          <EntitySetMapping Name="Cantante">
+            <EntityTypeMapping TypeName="BDPruebaTecnicaModel.Cantante">
+              <MappingFragment StoreEntitySet="Cantante">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="kindOfMusic" ColumnName="kindOfMusic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CantanteSongs">
+            <EntityTypeMapping TypeName="BDPruebaTecnicaModel.CantanteSongs">
+              <MappingFragment StoreEntitySet="CantanteSongs">
+                <ScalarProperty Name="idInter" ColumnName="idInter" />
+                <ScalarProperty Name="idCantante" ColumnName="idCantante" />
+                <ScalarProperty Name="idSong" ColumnName="idSong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="songs">
+            <EntityTypeMapping TypeName="BDPruebaTecnicaModel.songs">
+              <MappingFragment StoreEntitySet="songs">
+                <ScalarProperty Name="idSong" ColumnName="idSong" />
+                <ScalarProperty Name="song" ColumnName="song" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
